@@ -1,0 +1,79 @@
+name: deep
+
+channels:
+  - pytorch-nightly
+  - conda-forge
+
+dependencies:
+  - python
+  - pip
+
+  # Scientific Python Stack
+  - numpy
+  - scipy
+  - sympy
+  - pandas
+  - matplotlib
+  - ipython
+  - jupyter
+  - jupyterlab
+  - scikit-learn
+  - opencv
+  - seaborn
+  - plotly
+
+  # PyTorch
+  - pytorch
+  - torchvision
+  - torchaudio
+  - torchdata
+  - torchserve
+  - ignite
+
+  # Extra Deep Learning Libraries
+  - fastai
+  - lightning
+  - mlx
+  - ray-all
+
+  # HuggingFace Libraries
+  - transformers
+  - diffusers
+  - datasets
+  - gradio
+  - gradio-client
+  - huggingface_hub
+  - peft
+  - accelerate
+  - tokenizers
+  - evaluate
+  - trl
+  - timm
+  - safetensors
+
+  # Tokenizers
+  - tiktoken
+  - sentencepiece
+  - spacy
+  - spacy-model-en_core_web_sm
+  - spacy-model-de_core_news_sm
+
+  # Etc
+  - ruff
+  - nodejs
+
+  - pip:
+    - torchtext
+
+    # Onnx
+    - onnx
+    - onnxscript
+    - onnxruntime
+
+    # Google DL Stack for Apple Metal API
+    - keras
+    - tensorflow
+    - tensorflow-metal
+    - tensorflow-datasets
+    - jax-metal
+    - flax
