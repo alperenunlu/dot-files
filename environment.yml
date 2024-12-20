@@ -1,0 +1,84 @@
+name: deep
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python
+  - pip
+
+  # Scientific Python Stack
+  - numpy
+  - scipy
+  - sympy
+  - pandas
+  - matplotlib
+  - ipython
+  - jupyter
+  - jupyterlab
+  - scikit-learn
+  - opencv
+  - seaborn
+  - plotly
+
+  # Etc
+  - ruff
+  - mypy
+  - pytest
+  - nodejs
+
+  - pip:
+    # PyTorch
+    - torch --pre --index-url https://download.pytorch.org/whl/nightly/cu126
+    - torchaudio --pre --index-url https://download.pytorch.org/whl/nightly/cu126
+    - torchdata --pre --index-url https://download.pytorch.org/whl/nightly/cu126
+    - torchao --pre --index-url https://download.pytorch.org/whl/nightly/cu126
+    - torchmetrics --pre --index-url https://download.pytorch.org/whl/nightly/cu126
+    - torchtune --pre --index-url https://download.pytorch.org/whl/nightly/cu126
+    - torchvision --pre --index-url https://download.pytorch.org/whl/nightly/cu126
+
+    # Extra Deep Learning Libraries
+    - git+https://github.com/fastai/fastai
+    - lightning
+    - mlx
+    - ray[all]
+
+    # HuggingFace Libraries
+    - git+https://github.com/huggingface/transformers
+    - git+https://github.com/huggingface/diffusers
+    - git+https://github.com/huggingface/datasets
+    - gradio
+    - gradio-client
+    - git+https://github.com/huggingface/huggingface_hub
+    - git+https://github.com/huggingface/peft
+    - git+https://github.com/huggingface/accelerate
+    - tokenizers
+    - git+https://github.com/huggingface/evaluate
+    - git+https://github.com/huggingface/trl
+    - git+https://github.com/rwightman/pytorch-image-models
+    - safetensors
+
+    # Tokenizers
+    - tiktoken
+    - sentencepiece
+    - spacy
+
+    # - torchtext
+    - torch-tb-profiler
+    - pycocotools
+    - faster-coco-eval
+    - nbdev
+
+    # Onnx
+    - onnx
+    - onnxscript
+    - onnxruntime
+
+    # Google DL Stack
+    - keras
+    - tensorflow
+    - tensorflow-metal
+    - tensorflow-datasets
+    - jax-metal
+    - flax
+
