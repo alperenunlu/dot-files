@@ -1,0 +1,37 @@
+# Apply a config conditionally to all C files
+If:
+  PathMatch: .*\.(c|h)$
+CompileFlags:
+  Add:
+    - -I/opt/homebrew/Cellar/gcc/14.2.0_1/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/14/include
+    - -I/opt/homebrew/Cellar/gcc/14.2.0_1/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/14/include-fixed
+
+  Compiler: gcc
+
+---
+
+# Apply a config conditionally to all C++ files
+If:
+  PathMatch: .*\.(c|h)pp
+CompileFlags:
+  Add:
+    - -I/opt/homebrew/Cellar/gcc/14.2.0_1/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/14/../../../../../../include/c++/14
+    - -I/opt/homebrew/Cellar/gcc/14.2.0_1/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/14/../../../../../../include/c++/14/aarch64-apple-darwin24
+    - -I/opt/homebrew/Cellar/gcc/14.2.0_1/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/14/../../../../../../include/c++/14/backward
+    - -I/opt/homebrew/Cellar/gcc/14.2.0_1/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/14/include
+    - -I/opt/homebrew/Cellar/gcc/14.2.0_1/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/14/include-fixed
+    - -I/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/include
+    - -I/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/System/Library/Frameworks
+
+  Compiler: g++
+
+---
+
+# Apply a config conditionally to all CUDA files
+If:
+  PathMatch: .*\.cu$
+
+---
+
+# Tweak the clangd parse settings for all files
+CompileFlags:

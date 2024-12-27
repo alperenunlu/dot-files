@@ -1,0 +1,89 @@
+name: deep
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python
+  - pip
+
+  # Scientific Python Stack
+  - numpy
+  - scipy
+  - sympy
+  - pandas
+  - matplotlib
+  - ipython
+  - jupyter
+  - jupyterlab
+  - scikit-learn
+  - opencv
+  - seaborn
+  - plotly
+
+  # Etc
+  - ruff
+  - mypy
+  - pytest
+  - nodejs
+
+  - pip:
+    # PyTorch
+    ## Use CPU if OSX
+    - --pre
+    - --index-url https://download.pytorch.org/whl/nightly/cpu # [osx]
+    # - --index-url https://download.pytorch.org/whl/nightly/cu126 # [linux]
+    - torch
+    - torchaudio
+    - torchdata
+    - torchao
+    - torchmetrics
+    - torchtune
+    - torchvision
+    - --extra-index-url https://pypi.org/simple
+
+    # Extra Deep Learning Libraries
+    - fastai
+    - lightning
+    - mlx
+    - ray[all]
+
+    # HuggingFace Libraries
+    - git+https://github.com/huggingface/transformers
+    - git+https://github.com/huggingface/diffusers
+    - git+https://github.com/huggingface/datasets
+    - gradio
+    - gradio-client
+    - git+https://github.com/huggingface/huggingface_hub
+    - git+https://github.com/huggingface/peft
+    - git+https://github.com/huggingface/accelerate
+    - tokenizers
+    - git+https://github.com/huggingface/evaluate
+    - git+https://github.com/huggingface/trl
+    - git+https://github.com/rwightman/pytorch-image-models
+    - safetensors
+
+    # Tokenizers
+    - tiktoken
+    - sentencepiece
+    - spacy
+
+    # - torchtext
+    - torch-tb-profiler
+    - pycocotools
+    - faster-coco-eval
+    - nbdev
+
+    # Onnx
+    - onnx
+    - onnxscript
+    - onnxruntime
+
+    # Google DL Stack
+    # - keras
+    # - tensorflow
+    # - tensorflow-metal # [osx]
+    # - tensorflow-datasets
+    # - jax[cuda12] # [linux]
+    - jax-metal # [osx]
+    - flax
