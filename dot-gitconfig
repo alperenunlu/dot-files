@@ -1,0 +1,19 @@
+[user]
+	name = alperenunlu
+	email = 97191996+alperenunlu@users.noreply.github.com
+	signingkey = ""
+[core]
+	excludesfile = ~/.gitignore_global
+[credential]
+	helper = store
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[commit]
+	gpgsign = false
+[gpg]
+	format = openpgp
+[gpg "openpgp"]
+	program = ""

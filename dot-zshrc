@@ -1,0 +1,165 @@
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+
+zinit snippet OMZP::git
+zinit snippet OMZP::conda
+zinit snippet OMZP::brew
+zinit snippet OMZP::gnu-utils
+zinit snippet OMZP::kitty
+zinit snippet OMZP::macos
+zinit snippet OMZP::pip
+zinit snippet OMZP::python
+
+autoload -U compinit && compinit
+autoload -Uz edit-command-line
+zle -N edit-command-line
+
+zinit cdreplay -q
+
+HISTSIZE=500000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+LANG=en_US.UTF-8
+export VISUAL='nvim'
+export EDITOR=$VISUAL
+export MANPAGER="nvim +Man!"
+
+bindkey -v
+zle-keymap-select() {
+  case $KEYMAP in
+    vicmd)  print -n -- '\e[2 q' ;;   # steady block
+    viins|main) print -n -- '\e[6 q' ;;  # steady bar (or “beam”)
+  esac
+}
+zle -N zle-keymap-select
+
+zle-line-init() {
+  zle -K viins
+  print -n -- '\e[6 q'
+}
+zle -N zle-line-init
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+bindkey '^X^E' edit-command-line
+bindkey -M viins '^?' backward-delete-char                           
+bindkey -M viins '\b' backward-delete-char                 
+bindkey -M viins '^[[3~' delete-char
+bindkey -M vicmd '^?' delete-char                           
+bindkey -M vicmd '\b' delete-char                 
+bindkey -a '\' edit-command-line
+bindkey -as '^A' $'\eGA'
+bindkey -as '^E' $'\egg0f i'
+
+setopt appendhistory
+setopt inc_append_history
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_dups
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_find_no_dups
+setopt extended_history
+setopt autocd
+
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+
+alias ls='ls --color=auto'
+alias la='ls -lAh'
+
+eval "$(fzf --zsh)"
+
+upgrade() {
+	if [ -z "$1" ]; then
+		echo "Upgrading Homebrew & Pixi"
+		brew update && brew upgrade --greedy
+		pixi update --manifest-path ~/pixi.toml
+	elif [ "$1" = "all" ]; then
+		echo "Upgrading all"
+		brew update && brew upgrade --greedy
+		pixi update --manifest-path ~/pixi.toml
+		nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1
+		nvim --headless +MasonToolsUpdateSync +qa > /dev/null 2>&1
+		rustup update
+		code --update-extensions
+	elif [ "$1" = "brew" ]; then
+		echo "Upgrading Homebrew"
+		brew update && brew upgrade --greedy
+	elif [ "$1" = "pixi" ]; then
+		echo "Upgrading Pixi"
+		pixi update --manifest-path ~/pixi.toml
+	elif [ "$1" = "nvim" ]; then
+		echo "Upgrading Neovim"
+		nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1
+		nvim --headless +MasonToolsUpdateSync +qa > /dev/null 2>&1
+	elif [ "$1" = "rust" ]; then
+		echo "Upgrading Rust"
+		rustup update
+	elif [ "$1" = "code" ]; then
+		echo "Upgrading VSCode Extensions"
+		code --update-extensions
+	else
+		echo "Invalid argument"
+	fi
+}
+
+clean() {
+	if [ -z "$1" ]; then
+		echo "Cleaning Homebrew, Pixi & Pip"
+		brew autoremove
+		brew cleanup --prune all
+		pixi clean && pixi clean cache -y
+		pip cache purge
+	elif [ "$1" = "brew" ]; then
+		echo "Cleaning Homebrew"
+		brew autoremove
+		brew cleanup --prune all
+	elif [ "$1" = "pixi" ]; then
+		echo "Cleaning Pixi"
+		pixi clean && pixi clean cache -y
+	elif [ "$1" = "pip" ]; then
+		echo "Cleaning Pip"
+		pip cache purge
+	else
+		echo "Invalid argument"
+	fi
+}
+
+
+export PYTORCH_ENABLE_MPS_FALLBACK=1
+
+export PATH="$PATH:/Users/alperenunlu/.modular/bin"
+
+alias axbrew='arch -x86_64 /usr/local/bin/brew'
+alias yt='yt-dlp -f "bv*+ba/b" --merge-output-format mp4'
+alias k='kill -KILL %1'
+alias rpi-ssh='ssh alperenunlu@raspberrypi.local'
+alias matlab='/Applications/MATLAB_R2024b.app/bin/matlab'
+
+alias release-g++='g++ -O2 -DNDEBUG -pedantic-errors -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -Werror -std=c++2c -o release'
+alias debug-g++='g++ -ggdb -gdwarf -pedantic-errors -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -Werror -std=c++2c -o debug'
+
+alias cs-ssh='ssh -p 16222 workspace@127.0.0.1'
+
+source ~/.secrets
+
+eval "$(pixi shell-hook)"
+
+eval "$(starship init zsh)"
+
+# if command -v tmux >/dev/null 2>&1; then
+#   if [ -z "$TMUX" ]; then
+#     tmux -u attach || tmux -u new -s main
+#   fi
+
+

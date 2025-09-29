@@ -1,0 +1,44 @@
+# If:
+#   PathMatch: .*\.(c|h)$
+# CompileFlags:
+#   Add:
+#     - -I/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15/include
+#     - -I/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15/include-fixed
+#     - -I/opt/homebrew/include
+#     - -std=c2x
+#
+#   Compiler: /opt/homebrew/bin/gcc-15
+#
+# ---
+#
+# If:
+#   PathMatch: .*\.(c|h)pp
+# CompileFlags:
+#   Add:
+#     - -I/opt/homebrew/Cellar/gcc/15.1.0/include/c++/15
+#     - -I/opt/homebrew/Cellar/gcc/15.1.0/include/c++/15/aarch64-apple-darwin24
+#     - -I/opt/homebrew/Cellar/gcc/15.1.0/include/c++/15/backward
+#     - -I/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15/include
+#     - -I/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15/include-fixed
+#     - -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include
+#     - -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks
+#     - -DLOCAL
+#     - -Wall
+#     - -O2
+#     - -Wextra
+#     - -Wshadow
+#     - -Wconversion
+#     - -Wfloat-equal
+#     - -Wno-unused-const-variable
+#     - -Wno-sign-conversion
+#     - -std=c++17
+#     - -ferror-limit=0
+#
+#   Compiler: /opt/homebrew/bin/g++-15
+#
+# # ---
+# #
+# # If:
+# #   PathMatch: .*\.cu$
+# #
+# # ---
