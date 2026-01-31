@@ -20,9 +20,9 @@ return {
 				dependencies = {
 					-- `friendly-snippets` contains a variety of premade snippets.
 					--    See the README about individual language/framework/plugin snippets:
-					--    https://github.com/rafamadriz/friendly-snippets
+					--    https://github.com/alperenunlu/custom-snippets
 					{
-						"rafamadriz/friendly-snippets",
+						"alperenunlu/custom-snippets",
 						config = function()
 							require("luasnip.loaders.from_vscode").lazy_load()
 						end,
@@ -58,6 +58,11 @@ return {
 				--
 				-- See :h blink-cmp-config-keymap for defining your own keymap
 				preset = "default",
+
+				-- Jump between snippet placeholders (LuaSnip via blink.cmp)
+				-- Falls back to Neovim's default <C-h>/<C-l> behavior when not in a snippet.
+				["<C-l>"] = { "snippet_forward", "fallback" },
+				["<C-h>"] = { "snippet_backward", "fallback" },
 
 				-- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
 				--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps

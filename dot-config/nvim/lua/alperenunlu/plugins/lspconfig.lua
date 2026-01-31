@@ -255,41 +255,29 @@ return {
 						clangdFileStatus = true,
 					},
 				},
-				pyright = {
+				basedpyright = {
 					settings = {
-						pyright = {
+						basedpyright = {
 							disableOrganizeImports = true,
-						},
-						python = {
 							analysis = {
-								useLibraryCodeForTypes = true,
-								diagnosticSeverityOverrides = {
-									reportUnusedVariable = "warning",
-									reportUnusedImport = "none",
-								},
-								typeCheckingMode = "off",
-								diagnosticMode = "off",
+								ignore = { "*" },
 							},
 						},
 					},
 				},
 				ruff = {
-					on_attach = function(client, _)
-						if client.name == "ruff" then
-							client.server_capabilities.hoverProvider = false
-						end
-					end,
 					init_options = {
 						settings = {
 							lineLength = 120,
-							lint = {
-								select = { "B", "E", "F", "UP", "W" },
-							},
+							-- lint = {
+							-- 	select = { "B", "E", "F", "UP", "W" },
+							-- },
 						},
 					},
 				},
+				rust_analyzer = {},
+				emmet_language_server = {},
 				-- gopls = {},
-				-- rust_analyzer = {},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 				--
 				-- Some languages (like typescript) have entire language plugins that can be useful:
@@ -332,7 +320,8 @@ return {
 			vim.list_extend(ensure_installed, {
 				"stylua", -- Used to format Lua code
 				"clang-format",
-				"markdownlint",
+				"prettierd",
+				-- "markdownlint",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

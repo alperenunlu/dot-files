@@ -4,7 +4,7 @@
 --  For more options, you can see `:help option-list`
 
 -- Make line numbers default
--- vim.opt.number = true
+vim.o.number = true
 -- Make relative line numbers default
 vim.o.relativenumber = true
 
@@ -58,12 +58,17 @@ vim.o.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 10
 
+-- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
+-- instead raise a dialog asking if you wish to save the current file(s)
+-- See `:help 'confirm'`
+vim.o.confirm = true
+
 -- Configure tab and indentation behavior
--- vim.o.tabstop = 4 -- Number of spaces that a <Tab> in the file counts for
--- vim.o.softtabstop = 4 -- Number of spaces that a <Tab> counts for while performing editing operations
--- vim.o.shiftwidth = 4 -- Size of an indent
--- vim.o.expandtab = true -- Convert tabs to spaces
--- vim.o.smartindent = true -- Automatically insert indents in certain scenarios
+vim.o.tabstop = 4 -- Number of spaces that a <Tab> in the file counts for
+vim.o.softtabstop = 4 -- Number of spaces that a <Tab> counts for while performing editing operations
+vim.o.shiftwidth = 4 -- Size of an indent
+vim.o.expandtab = true -- Convert tabs to spaces
+vim.o.smartindent = true -- Automatically insert indents in certain scenarios
 
 -- Configure Fold method
 vim.o.foldmethod = "indent"
